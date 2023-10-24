@@ -61,8 +61,7 @@
 }
 
 aside{
-  padding-left: 1em;
-  display: block;
+  display: flex;
   flex-direction: column;
   align-items: center;
   position: fixed;
@@ -71,5 +70,35 @@ aside{
   background: #1a1a1a;
   height: 100%;
   width: 25%;
-  min-width: 100px;
+  min-width: 300px;
+  z-index: 10;
+}
+
+.stateMessage{
+  font-size: '1.5rem'; 
+  line-height: '2em';
+  padding-bottom: 4px;
+}
+
+.winner{
+  color: rgb(20, 169, 20);
+}
+
+.draw{
+  color: rgb(229, 229, 105);
+}
+
+li{
+  list-style: none;
+}
+
+.historyButton{
+  margin-bottom: 3px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  width: 100%;
 }
