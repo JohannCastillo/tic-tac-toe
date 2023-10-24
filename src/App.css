@@ -47,6 +47,7 @@
   grid-template-columns: repeat(3, auto);
   padding: 20px;
   background-color: #1A1A1A;
+  margin-top: 8px;
 }
 
 .cell {
@@ -120,3 +121,7 @@ li{
 .border-bottom{
   border-bottom: none !important;
 } 
+
+.large{
+  flex-grow: 1;
+}

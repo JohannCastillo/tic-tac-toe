@@ -1,5 +1,6 @@
 import Cell from "./Cell";
 import Sidebar from "./Sidebar";
+import Bar from "./Bar";
 import { useSquaresContext, useFunctionsContext } from "../context/GameProvider"
 
 function Board() {
@@ -7,22 +8,20 @@ function Board() {
     const game = useSquaresContext()
     const functions = useFunctionsContext()
 
+    const isWinner = game.winner !== null
+    const isDraw = game.squares.every(value => value !== null) && !isWinner
+  
     return (
         <>
             <article>
-                {game.winner != null ?
-                    (
-                        <h4 className="stateMessage winner">Ganador: {game.winner}</h4>
-                    ) : (
-                        <>
-                            {game.squares.every((value) => value !== null) ? (
-                                <h4 className="stateMessage draw"> Empate </h4>
-                            ) : (
-                                <h4 className="stateMessage">Siguiente turno: {game.turno}</h4>
-                            )}
-                        </>
-                    )
-                }
+                <div style={{ display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center',}}>
+                    <strong className="stateMessage"> {isWinner ? 'Ganador: ' : (isDraw ? 'Empate' : 'Siguiente turno ')} </strong>
+                    <div style={{display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem'}}>
+                        <Bar children="X" className="button large" isActive={isWinner ? game.squares[game.winner[0]] === 'X' : game.turno === 'X'} isDraw={isDraw}></Bar>
+                        <Bar children="O" className="button large" isActive={isWinner ? game.squares[game.winner[0]] === 'O' : game.turno === 'O'}isDraw={isDraw}></Bar>
+                    </div>
+                </div>
+
                 <div className="board">
                     <Cell key={0} index={0} className="border-top border-left"/>
                     <Cell key={1} index={1} className="border-top"/>
@@ -36,17 +35,17 @@ function Board() {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <button className="button" onClick={functions.clearBoard}>Nuevo juego</button>
-                    <button className="button" onClick={functions.toggleMovsVisibility} style={{ visibility: game.movementsVisibility == '' ? 'hidden' : ''  }}> Ver moviminetos </button>
+                    <button className="button" onClick={functions.toggleMovsVisibility} style={{ visibility: game.movementsVisibility == '' ? 'hidden' : ''  }}> Ver jugadas </button>
                 </div>
             </article>
 
             <Sidebar
                 visibility={game.movementsVisibility}
                 toggleMovsVisibility={functions.toggleMovsVisibility}
-                title={'Movimientos (' + game.squares.filter((value) => value !== null).length + ')'}
+                title={'Jugadas (' + game.squares.filter((value) => value !== null).length + ')'}
                 content={game.squares.every((value) => value === null) ? (
                     <>
-                        <small>No se han realizado movimientos</small>
+                        <small>No se han realizado jugadas</small>
                     </>
                 ) : (
                     <>
@@ -55,7 +54,7 @@ function Board() {
                                 game.history.slice(1).map((value, index) => (
                                     <li key={crypto.randomUUID()}>
                                         <button className="historyButton" onClick={() => functions.getHistory(index + 1)}>
-                                            Movimiento {index + 1}
+                                            Ir a la jugada #{index + 1}
                                         </button>
                                     </li>
                                 ))
