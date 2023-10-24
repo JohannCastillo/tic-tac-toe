@@ -13,7 +13,7 @@ export function GameProvider({children}){
     }
 
     const [state, setState] = useState(INITIAL_STATES)
-    const [ movementsVisibility, setMovementsVisibility] = useState('')
+    const [ movementsVisibility, setMovementsVisibility] = useState('hidden')
 
     function changeTurn(i){
         setState(prevState => {

@@ -45,6 +45,8 @@
   display: grid;
   /* 3 columns and 3 rows */
   grid-template-columns: repeat(3, auto);
+  padding: 20px;
+  background-color: #1A1A1A;
 }
 
 .cell {
