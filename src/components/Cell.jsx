@@ -20,5 +20,5 @@ export default function Cell(props){
         functions.changeTurn(props.index)
     }
 
-    return <button className="cell" onClick={handleClick}>{value}</button>
+    return <button className={"cell "+props.className} onClick={handleClick}>{value}</button>
 }

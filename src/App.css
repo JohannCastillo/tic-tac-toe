@@ -56,8 +56,8 @@
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
 }
 
 aside{
@@ -102,3 +102,19 @@ li{
   cursor: pointer;
   width: 100%;
 }
+
+.border-top{
+  border-top: none !important;
+}
+
+.border-left{
+  border-left: none !important;
+}
+
+.border-right{
+  border-right: none !important;
+}
+
+.border-bottom{
+  border-bottom: none !important;
+} 

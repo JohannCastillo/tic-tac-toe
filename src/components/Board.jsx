@@ -24,15 +24,15 @@ function Board() {
                     )
                 }
                 <div className="board">
-                    <Cell key={0} index={0} />
-                    <Cell key={1} index={1} />
-                    <Cell key={2} index={2} />
-                    <Cell key={3} index={3} />
+                    <Cell key={0} index={0} className="border-top border-left"/>
+                    <Cell key={1} index={1} className="border-top"/>
+                    <Cell key={2} index={2} className="border-top border-right"/>
+                    <Cell key={3} index={3} className="border-left"/>
                     <Cell key={4} index={4} />
-                    <Cell key={5} index={5} />
-                    <Cell key={6} index={6} />
-                    <Cell key={7} index={7} />
-                    <Cell key={8} index={8} />
+                    <Cell key={5} index={5} className="border-right"/>
+                    <Cell key={6} index={6} className="border-bottom border-left"/>
+                    <Cell key={7} index={7} className="border-bottom"/>
+                    <Cell key={8} index={8} className="border-bottom border-right"/>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <button className="button" onClick={functions.clearBoard}>Nuevo juego</button>
