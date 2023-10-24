@@ -1,21 +1,24 @@
-import { useState } from 'react'
 import Board from './components/board.jsx'
+import reactLogo from './assets/react.svg'
 import './App.css'
-import { SquaresProvider, useSquaresClearContext, useSquaresContext } from './context/SquaresProvider.jsx'
+import { SquaresProvider, useSquaresContext, useFunctionsContext } from './context/SquaresProvider.jsx'
 
 function App() {
-
-  const clear = useSquaresClearContext()
-
   return (
     <>
      <SquaresProvider>
-      <h1>Tres en raya con React</h1>
-        <h5>Turno de  </h5>
-        <div className="card">
-          <Board></Board>
+      <main className='main-section'>
+        <h1>TicTacToe</h1>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: '0.5rem' }}>
+          <a href="https://react.dev" target="_blank">
+              <img src={reactLogo} className="logo react" alt="React logo" />
+          </a>
+          <p>React</p>
         </div>
-        <button onClick={clear}>Nuevo juego</button>
+          <section className="card">
+            <Board></Board>
+          </section>
+      </main>
      </SquaresProvider>
     </>
   )
