@@ -50,6 +50,13 @@ h1 {
   margin-top: 8px;
 }
 
+.button:disabled{
+  cursor: not-allowed;
+  background-color: #d1d1d1;
+  color: #4f4f4f';
+}
+
+
 .historyButton{
   margin-bottom: 5px;
   border: inherit;

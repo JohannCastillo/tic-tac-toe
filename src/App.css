@@ -83,14 +83,6 @@ aside{
   padding-bottom: 4px;
 }
 
-.winner{
-  color: rgb(20, 169, 20);
-}
-
-.draw{
-  color: rgb(229, 229, 105);
-}
-
 li{
   list-style: none;
 }
@@ -104,6 +96,11 @@ li{
   font-family: inherit;
   cursor: pointer;
   width: 100%;
+  color:#1A1A1A;
+}
+
+.historyButton::after{
+  opacity: 0.8;
 }
 
 .border-top{

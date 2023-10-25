@@ -1,4 +1,6 @@
 import { createContext, useState, useContext } from "react"
+import {TURNS, LINES, COLORS} from "../constants/constants"
+import confetti from "canvas-confetti"
 
 const SquaresContext = createContext()
 const FunctionsContext = createContext()
@@ -6,7 +8,7 @@ const FunctionsContext = createContext()
 export function GameProvider({children}){
     const INITIAL_STATES={
         squares: Array(9).fill(null),
-        turno: 'X',
+        turno: TURNS.X,
         winner: null,
         history: [Array(9).fill(null)],
         historyIndex: 0,
@@ -25,7 +27,7 @@ export function GameProvider({children}){
             return {
                 ...prevState,
                 squares: newSquares,
-                turno: prevState.turno == 'X' ? 'O' : 'X',
+                turno: prevState.turno == TURNS.X ? TURNS.O : TURNS.X,
                 winner: calculateWinner(newSquares),
                 history: newHistory,
                 historyIndex: prevState.historyIndex+1
@@ -47,20 +49,11 @@ export function GameProvider({children}){
 
 
     function calculateWinner(squares) {
-        const lines = [
-          [0, 1, 2],
-          [3, 4, 5],
-          [6, 7, 8],
-          [0, 3, 6],
-          [1, 4, 7],
-          [2, 5, 8],
-          [0, 4, 8],
-          [2, 4, 6],
-        ];
-        for (let i = 0; i < lines.length; i++) {
-          const [a, b, c] = lines[i];
+        for (let i = 0; i < LINES.length; i++) {
+          const [a, b, c] = LINES[i];
           if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-            return lines[i]
+            confetti()
+            return LINES[i]
           }
         }
         return null;
@@ -75,7 +68,7 @@ export function GameProvider({children}){
       }
 
     return (
-        <SquaresContext.Provider value={{...state, movementsVisibility}}>
+        <SquaresContext.Provider value={{...state, movementsVisibility, COLORS}}>
             <FunctionsContext.Provider value={{...functions}}>
                 {children}
             </FunctionsContext.Provider>

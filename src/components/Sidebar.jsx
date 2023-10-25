@@ -1,7 +1,3 @@
-import { useState } from "react"
-
-import { useSquaresContext } from "../context/GameProvider"
-
 function Sidebar(props) {
 
     return (

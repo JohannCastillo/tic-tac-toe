@@ -1,7 +1,7 @@
-
+import { COLORS } from "../constants/constants"
 function Bar(props){
 
-    const turno = props.isActive && '#0096c0'
+    const turno = props.isActive && COLORS.turn
     const draw = props.isDraw
 
     return(

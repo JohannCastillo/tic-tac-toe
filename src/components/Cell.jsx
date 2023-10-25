@@ -13,17 +13,19 @@ export default function Cell(props){
             setValue('')
             setWinnerCell('')
         }
-    
-        if(squares.winner) 
-            if(squares.winner.some(value => value === props.index))
-                setWinnerCell('#0096c0')
 
         setValue(squares.history[squares.historyIndex][props.index])
         
-    }, [squares.squares, squares.historyIndex, squares.winner])
+    }, [squares.squares, squares.historyIndex])
 
+    useEffect(() => {
+        if(squares.winner) 
+            if(squares.winner.some(value => value === props.index))
+                setWinnerCell(squares.COLORS.winner)
+    }, [squares.winner])
+    
     function handleClick(){
-        if (squares.squares[props.index] || squares.winner) return
+        if (squares.squares[props.index] || squares.winner || squares.historyIndex < squares.history.length-1) return
         functions.changeTurn(props.index)
     }
 
