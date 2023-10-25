@@ -7,25 +7,26 @@ export default function Cell(props){
 
     const squares = useSquaresContext()
     const functions = useFunctionsContext()
+    const currentHistory = squares.history[squares.historyIndex]
     
-    useEffect(() => {
-        if (squares.squares.every((value) => value === null)){
+    useEffect(() => {        
+        if (currentHistory.every((value) => value === null)){
             setValue('')
             setWinnerCell('')
-        }
-
-        setValue(squares.history[squares.historyIndex][props.index])
+            return 
+        }  
         
-    }, [squares.squares, squares.historyIndex])
+        setValue(currentHistory[props.index])
+        // si hay ganador pintar celdas en líneas ganadoras
+        if (squares.winner && squares.winner.some(value => value === props.index))
+            setWinnerCell(squares.COLORS.winner)
+        // si cambia el índice de historial para ver una jugada anterior se despintan las celdas 
+        if(squares.historyIndex < squares.history.length-1)
+            setWinnerCell('')
+    }, [squares.historyIndex])
 
-    useEffect(() => {
-        if(squares.winner) 
-            if(squares.winner.some(value => value === props.index))
-                setWinnerCell(squares.COLORS.winner)
-    }, [squares.winner])
-    
     function handleClick(){
-        if (squares.squares[props.index] || squares.winner || squares.historyIndex < squares.history.length-1) return
+        if (currentHistory[props.index] || squares.winner || squares.historyIndex < squares.history.length-1) return
         functions.changeTurn(props.index)
     }
 

@@ -4,8 +4,8 @@ export const TURNS = {
 }
 
 export const COLORS = {
-    turn: '#124e67',
-    winner: '#124e67',
+    turn: '#00D8FF',
+    winner: '#00D8FF',
     draw: '#D8B117'
 }
 
