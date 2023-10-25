@@ -11,7 +11,9 @@ function Board() {
 
     const isWinner = game.winner !== null
     const isDraw = game.squares.every(value => value !== null) && !isWinner
-   
+    const isXWinner = isWinner && game.squares[game.winner[0]] === TURNS.X
+    const iOWinner = isWinner && game.squares[game.winner[0]] === TURNS.O
+
     function controls(){ 
         return (
             <>  
@@ -30,10 +32,26 @@ function Board() {
         <>
             <article>
                 <div style={{ display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center',}}>
-                    <strong className="stateMessage"> {isWinner ? 'Ganador ' : (isDraw ? 'Empate' : 'Siguiente turno ')} </strong>
+                    <strong className="stateMessage" > {!isWinner && (isDraw ? 'Empate' : 'Siguiente turno ')} </strong>
                     <div style={{display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem'}}>
-                        <Bar children={TURNS.X} className="button large" isActive={isWinner ? game.squares[game.winner[0]] === TURNS.X : game.turno === TURNS.X} isDraw={isDraw}></Bar>
-                        <Bar children={TURNS.O} className="button large" isActive={isWinner ? game.squares[game.winner[0]] === TURNS.O : game.turno === TURNS.O}isDraw={isDraw}></Bar>
+                        <div className="large" style={{display: 'flex', flexDirection: 'column', position: 'relative', color: game.COLORS.winner}}>
+                            <strong style={{position: 'absolute', top: '-20px', alignSelf: 'center', visibility: isXWinner ? '' : 'hidden',}}>Ganador</strong>
+                            <Bar 
+                                children={TURNS.X} 
+                                className="button large" 
+                                isActive={isWinner ? game.squares[game.winner[0]] === TURNS.X : game.turno === TURNS.X} 
+                                isDraw={isDraw}
+                            />
+                        </div>
+                        <div className="large" style={{display: 'flex', flexDirection: 'column', position: 'relative', color: game.COLORS.winner}}>
+                            <strong style={{position: 'absolute', top: '-20px', alignSelf: 'center', visibility: iOWinner ? '' : 'hidden'}}>Ganador</strong>
+                            <Bar 
+                                children={TURNS.O} 
+                                className="button large" 
+                                isActive={isWinner ? game.squares[game.winner[0]] === TURNS.O : game.turno === TURNS.O} 
+                                isDraw={isDraw}
+                            />
+                         </div>
                     </div>
                 </div>
                 <div style={{display: 'flex', flexDirection: 'row'}}>
