@@ -19,8 +19,9 @@ export default function Cell(props){
             setWinnerCell('')
             return 
         }  
-        console.log("using efect")
+
         firstRender.current = false
+    
         setValue(currentHistory[props.index])
         // si hay ganador pintar celdas en líneas ganadoras
         if (squares.winner && squares.winner.some(value => value === props.index))
