@@ -1,6 +1,7 @@
 import Cell from "./Cell"
 import Sidebar from "./Sidebar"
 import Bar from "./Bar"
+import Controls from "./Controls"
 import { TURNS } from "../constants/constants"
 import { useSquaresContext, useFunctionsContext } from "../context/GameProvider"
 
@@ -13,20 +14,6 @@ function Board() {
     const isDraw = game.squares.every(value => value !== null) && !isWinner
     const isXWinner = isWinner && game.squares[game.winner[0]] === TURNS.X
     const iOWinner = isWinner && game.squares[game.winner[0]] === TURNS.O
-
-    function controls(){ 
-        return (
-            <>  
-                <button className="button" onClick={functions.clearBoard}><i className="fa-solid fa-rotate-right"></i></button>
-                <div style={{ display: 'flex', width: '100%'}}>
-                    <button className="button large" onClick={() => functions.getHistory(0)}><i className="fa-solid fa-backward" ></i></button>
-                    <button className="button large" onClick={() => functions.getHistory(game.historyIndex-1)} disabled={game.historyIndex === 0}><i className="fa-solid fa-backward-step"></i></button>
-                    <button className="button large" onClick={() => functions.getHistory(game.historyIndex+1)} disabled={game.historyIndex + 1 >= game.history.length} ><i className="fa-solid fa-forward-step"></i></button>
-                    <button className="button large" onClick={() => functions.getHistory(game.history.length-1)}> <i className="fa-solid fa-forward-fast"></i> </button>
-                </div>
-            </>
-        )
-    }
 
     return (
         <>
@@ -68,9 +55,7 @@ function Board() {
                     </div>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <div style={{display:'flex', justifyContent:'center', gap: '0.5rem'}}>
-                        {controls()}
-                    </div>
+                    <Controls game={game} clearBoard={functions.clearBoard} getHistory={functions.getHistory}/>
                     <button className="button" onClick={functions.toggleMovsVisibility} style={{ visibility: game.movementsVisibility == '' ? 'hidden' : ''  }}> Lista de jugadas </button>
                 </div>
             </article>

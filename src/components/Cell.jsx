@@ -1,21 +1,26 @@
-import { useState, useEffect} from "react"
+import { useState, useEffect, useRef} from "react"
 import { useSquaresContext, useFunctionsContext } from "../context/GameProvider"
 
 export default function Cell(props){
     const [value, setValue] = useState('')
     const [winnerCell, setWinnerCell] = useState('')
+    
+    const firstRender = useRef(true)
 
     const squares = useSquaresContext()
     const functions = useFunctionsContext()
     const currentHistory = squares.history[squares.historyIndex]
     
-    useEffect(() => {        
+    useEffect(() => {      
         if (currentHistory.every((value) => value === null)){
+            if(firstRender.current) return 
+
             setValue('')
             setWinnerCell('')
             return 
         }  
-        
+        console.log("using efect")
+        firstRender.current = false
         setValue(currentHistory[props.index])
         // si hay ganador pintar celdas en líneas ganadoras
         if (squares.winner && squares.winner.some(value => value === props.index))
